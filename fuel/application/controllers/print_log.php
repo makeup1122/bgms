@@ -15,7 +15,6 @@ class Print_log extends Base{
     public function items(){
         $where = $this->input->get();
         $total_rows = $this->Print_log->count_all();
-        // echo $
         $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->per_page; 
         $config['use_page_numbers'] = TRUE;
