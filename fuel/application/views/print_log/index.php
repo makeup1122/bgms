@@ -21,21 +21,21 @@
                 <thead>
                    <tr>
                        <th>ID</th>
-                       <th>打印的时间</th>
+                       <th>打印时间</th>
                        <th>一维码内容</th>
-                       <th>打印的信息</th>
+                       <th>打印信息</th>
                        <th>打印类型</th>
                        <th>证件类型</th>
-                       <th>扫描采集图像存放路径</th>
+                       <th>图像路径</th>
                        <th>人数</th>
                        <th>性别</th>
                        <th>证件号码</th>
                        <th>姓名</th>
-                       <th>是否携带儿童</th>
-                       <th>是否为团队携带者</th>
+                       <th>携带儿童</th>
+                       <th>团队携带者</th>
                        <th>打印结果</th>
                        <th>错误信息</th>
-                       <th>时间</th>
+                       <!--<th>时间</th>-->
                     </tr>
                 </thead>
                 <tbody>
@@ -73,9 +73,9 @@
 
 
         <script type="text/javascript">
-            function getPrintLogs() {
+            function getPrintLogs(page) {
                 $.ajax({
-                    url: "/print_log/items",
+                    url: "/print_log/items" + page,
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
@@ -84,7 +84,7 @@
                         for (var i = 0; i < data.result.length; i++) {
                             var item = data.result[i];
                             dataHtml += '<tr>' +
-                                '<td>' + item.id + '</td><td>' + item.print_time + '</td><td>' + item.print_barcode + '</td><td>' + item.print_info + '</td><td>' + item.print_type + '</td><td>' + item.idtype + '</td><td>' + item.scan_pic + '</td><td>' + item.people_num + '</td><td>' + item.sex + '</td>' +'</td><td>' + item.id_num + '</td><td>' + item.name + '</td><td>' + item.hasChild + '</td><td>' + item.hasGroup + '</td><td>' + item.result + '</td><td>' + item.error_msg + '</td>' +
+                                '<td>' + item.id + '</td><td>' + item.print_time + '</td><td>' + item.print_barcode + '</td><td>' + item.print_info + '</td><td>' + item.print_type + '</td><td>' + item.idtype + '</td><td>' + item.scan_pic + '</td><td>' + item.people_num + '</td><td>' + item.sex + '</td>' + '</td><td>' + item.id_num + '</td><td>' + item.name + '</td><td>' + item.hasChild + '</td><td>' + item.hasGroup + '</td><td>' + item.result + '</td><td>' + item.error_msg + '</td>' +
                                 '</tr>';
                         }
                         $(".result table tbody").html(dataHtml);
@@ -92,7 +92,13 @@
                     }
                 });
             }
-            getPrintLogs();
+            //获取首页数据
+            getPrintLogs("");
+            //绑定页面跳转事件
+            $(".pagination").on('click', 'a', function() {
+                console.log($(this).attr("data-href"));
+                getPrintLogs($(this).attr("data-href"));
+            });
         </script>
 
 </body>

@@ -82,7 +82,7 @@ class User extends CI_Controller{
         $config['last_link'] = '尾页';
         $this->pagination->initialize($config);
         $pageinfo = $this->pagination->create_links();
-        // echo $pageinfo;
+        $pageinfo = str_replace("href"," href='#' data-href",$pageinfo);
         $result = $this->user->getContent($config['per_page'],$this->uri->segment(3));
         echo json_encode(array("result"=>$result,"pageinfo"=>$pageinfo));
          }else{

@@ -74,9 +74,9 @@
         </div>
 
 <script type="text/javascript">
-  function getUser(){
+  function getUser(page){
     $.ajax({
-      url : "/user/items",
+      url : "/user/items" + page,
       type : "GET",
       dataType : "json",
       success : function(data) {
@@ -93,7 +93,12 @@
       }
     });
   }
-  getUser();
+  getUser("");
+    //绑定页面跳转事件
+            $(".pagination").on('click', 'a', function() {
+                console.log($(this).attr("data-href"));
+                getUser($(this).attr("data-href"));
+            });
 </script>
 
 </body>

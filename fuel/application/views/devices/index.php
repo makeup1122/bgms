@@ -37,168 +37,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Tompson</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>
-                            <a href="" title="编辑"><i class="fa fa-pencil"></i></a> &nbsp;&nbsp;
-                            <a href="#myModal" title="删除" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Mark</td>
-                        <td>Tompson</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>
-                            <a href=""><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                            <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Mark</td>
-                        <td>Tompson</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>
-                            <a href=""><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                            <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Mark</td>
-                        <td>Tompson</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>
-                            <a href=""><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                            <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Mark</td>
-                        <td>Tompson</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>
-                            <a href=""><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                            <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Mark</td>
-                        <td>Tompson</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>
-                            <a href=""><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                            <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Mark</td>
-                        <td>Tompson</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>
-                            <a href=""><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                            <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Mark</td>
-                        <td>Tompson</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>
-                            <a href=""><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                            <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>Mark</td>
-                        <td>Tompson</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>
-                            <a href=""><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                            <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>Mark</td>
-                        <td>Tompson</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>the_mark7</td>
-                        <td>
-                            <a href=""><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                            <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-
                 </tbody>
             </table>
 
             <ul class="pagination">
-                <!--<li><a href="#">&laquo;</a></li>-->
-                <!--<li class="active"><a href="#">1</a></li>-->
-                <!--<li><a href="#">2</a></li>-->
-                <!--<li><a href="#">3</a></li>-->
-                <!--<li><a href="#">4</a></li>-->
-                <!--<li><a href="#">5</a></li>-->
-                <!--<li><a href="#">&raquo;</a></li>-->
             </ul>
 
             <div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -229,9 +71,9 @@
 
 
 <script type="text/javascript">
-  function getDevices(){
+  function getDevices(page){
     $.ajax({
-      url : "/devices/items",
+      url : "/devices/items" +page,
       type : "GET",
       dataType : "json",
       success : function(data) {
@@ -249,7 +91,13 @@
       }
     });
   }
-  getDevices();
+  getDevices("");
+  
+  //绑定页面跳转事件
+            $(".pagination").on('click', 'a', function() {
+                console.log($(this).attr("data-href"));
+                getDevices($(this).attr("data-href"));
+            });
 </script>
 
 </body>

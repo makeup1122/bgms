@@ -24,7 +24,7 @@ class Print_log extends Base{
         $config['last_link'] = '尾页';
         $this->pagination->initialize($config);
         $pageinfo = $this->pagination->create_links();
-        // echo $pageinfo;
+        $pageinfo = str_replace("href"," href='#' data-href",$pageinfo);
         $result = $this->Print_log->getContent($config['per_page'],$this->uri->segment(3));
         echo json_encode(array("result"=>$result,"pageinfo"=>$pageinfo));
     }
