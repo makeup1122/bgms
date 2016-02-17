@@ -9,7 +9,7 @@ class Login extends CI_Controller {
 		$this->load->library('session');
 
 		if (!$this->fuel->config('admin_enabled')) show_404();
-
+		// 这个函数以一个关联数组作为输入参数,将这个数组用PHP的extract函数转化成与之对应的变量。
 		$this->load->vars(array(
 			'js' => '', 
 			'css' => css($this->fuel->config('xtra_css')), // use CSS function here because of the asset library path changes below

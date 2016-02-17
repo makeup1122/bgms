@@ -39,8 +39,10 @@
 */
 
 
-$route['default_controller'] = 'fuel/page_router';
-$route['404_override'] = 'fuel/page_router';
+// $route['default_controller'] = 'fuel/page_router';
+// 系统保留路由
+$route['default_controller'] = 'Index';
+$route['404_override'] = 'Index';
 
 /*	
 | Uncomment this line if you want to use the automatically generated sitemap based on your navigation.
@@ -48,7 +50,7 @@ $route['404_override'] = 'fuel/page_router';
 */ 
 //$route['sitemap.xml'] = 'sitemap_xml';
 
-include(MODULES_PATH.'/fuel/config/fuel_routes.php');
+// include(MODULES_PATH.'/fuel/config/fuel_routes.php');
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
