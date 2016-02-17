@@ -2,17 +2,23 @@
 // require_once("base.php");
 class User extends CI_Controller{
     public static $statusVal = array(0=>"正常",1=>"停用");
+    public $per_page = 10;
     function __construct(){
         parent::__construct();
         $this->load->model('User_model','user');
         $this->load->helper('cookie');
+        $this->load->library('pagination');
     }
     //用户首页
     public function index(){
         if($this->check_user_status()){
-            $this->load->view("user/index");    
+            $this->load->view("common/_head");
+            $this->load->view("common/_top");
+            $this->load->view("common/_left");
+            $this->load->view("user/index");
+            $this->load->view("common/_footer");  
         }else{
-            $this->view->load("user/login");
+            $this->load->view("user/login");
         }
     }
     public function login(){
@@ -45,6 +51,7 @@ class User extends CI_Controller{
     }
     //展现和修改当前用户信息
     public function userinfo(){
+        if($this->check_user_status()){
         if( ! empty($_POST)){
             $userinfo = $this->input->post();
             if(!$this->user->update($userinfo)){
@@ -57,6 +64,30 @@ class User extends CI_Controller{
         $data['userinfo'] = $userinfo;
         $data['statusVal'] = self::$statusVal;
         $this->load->view("user/userinfo",$data);
+        }else{
+            $this->load->view("user/login");
+        }
+    }    
+    public function items(){
+         if($this->check_user_status()){
+        $where = $this->input->get();
+        $total_rows = $this->user->count_all();
+        // echo $
+        $config['total_rows'] = $total_rows;
+        $config['per_page'] = $this->per_page; 
+        $config['use_page_numbers'] = TRUE;
+        $config['uri_segment'] = 3; 
+        $config['num_links'] = 5;
+        $config['first_link'] = '首页';
+        $config['last_link'] = '尾页';
+        $this->pagination->initialize($config);
+        $pageinfo = $this->pagination->create_links();
+        // echo $pageinfo;
+        $result = $this->user->getContent($config['per_page'],$this->uri->segment(3));
+        echo json_encode(array("result"=>$result,"pageinfo"=>$pageinfo));
+         }else{
+            $this->load->view("user/login");
+        }
     }
 }
 ?>

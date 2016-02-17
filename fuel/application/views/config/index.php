@@ -1,15 +1,14 @@
 <!doctype html>
 <html lang="cn">
-
 <body class=" theme-blue">
-
+   
     <div class="content">
         <div class="header">
 
-            <h1 class="page-title">用户列表</h1>
+            <h1 class="page-title">配置管理</h1>
             <ul class="breadcrumb">
                 <li><a href="index.html">主页</a> </li>
-                <li class="active">用户信息</li>
+                <li class="active">配置信息列表</li>
             </ul>
 
         </div>
@@ -25,19 +24,12 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>用户ID</th>
-                        <th>用户名</th>
-                        <th>邮箱</th>
-                        <th>手机号码</th>
-                        <th>状态</th>
-                        <th>备注</th>
-                        <th>创建时间</th>
-                        <th>修改时间</th>
-                        <th>最后登录时间</th>
-                        <th>最后登录IP</th>
-                        <th>角色ID</th>
+                        <th>配置ID</th>
+                        <th>配置名</th>
+                        <th>配置值</th>
+                        <th>配置说明</th>
                         <th style="">操作</th>
-                    </tr>
+                        </tr>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,10 +65,11 @@
             </footer>
         </div>
 
+
 <script type="text/javascript">
   function getUser(){
     $.ajax({
-      url : "/user/items",
+      url : "/config/items",
       type : "GET",
       dataType : "json",
       success : function(data) {
@@ -85,7 +78,7 @@
         for (var i = 0; i < data.result.length; i++) {
           var item = data.result[i];
           dataHtml += '<tr>' +
-                      '<td>'+item.id+'</td><td>'+item.username+'</td><td>'+item.email+'</td><td>'+item.mobile+'</td><td>'+item.status+'</td><td>'+item.remark+'</td><td>'+item.create_time+'</td><td>'+item.update_time+'</td><td>'+item.last_login_time+'</td><td>'+item.last_login_ip+'</td><td>'+item.role_id+'</td>'+
+                      '<td>'+item.id+'</td><td>'+item.name+'</td><td>'+item.value+'</td><td>'+item.remark+'</td>'+
                       '</tr>';
         }
         $(".result table tbody").html(dataHtml);

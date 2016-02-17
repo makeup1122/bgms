@@ -33,5 +33,15 @@ class User_model extends CI_Model{
             return false;
         }
     }
+       //获取内容
+    function getContent($limit="",$offset=""){
+        $this->db->limit($limit,($offset-1)*($limit));
+        $result = $this->db->get('user');
+        return $result->result();
+    }
+    //获取当前表记录总数
+    function count_all(){
+        return $this->db->count_all_results('user');
+    }
 }
 ?>

@@ -1,9 +1,11 @@
 <?php
-class Devices_model extends CI_Model{
+class Print_log_model extends CI_Model{
     function __construct(){
         parent::__construct();
     }
-    function getContent(){
+    //获取内容
+    function getContent($limit="",$offset=""){
+        $this->db->limit($limit,($offset-1)*($limit));
         $result = $this->db->get('print_log');
         return $result->result();
     }

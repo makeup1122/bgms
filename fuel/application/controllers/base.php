@@ -1,13 +1,13 @@
 <?php 
 class Base extends CI_Controller{
     
-    public $per_page = 2;
+    public $per_page = 10;
     
     function __construct(){
         parent::__construct();
         $this->load->helper('cookie');
         $this->check_user_status();
-        
+        $this->load->library('pagination');
         // $this->migrate();
     }
     public function check_user_status(){

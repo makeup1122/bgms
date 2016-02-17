@@ -8,12 +8,15 @@ require_once("base.php");
 class Devices extends Base{
     function __construct(){
         parent::__construct();
-        $this->load->library('pagination');
         $this->load->model('Devices_model','devices');
     }
     //设备首页
     public function index(){
+        $this->load->view("common/_head");
+        $this->load->view("common/_top");
+        $this->load->view("common/_left");
         $this->load->view("devices/index");
+        $this->load->view("common/_footer");
     }
     //根据条件获取设备列表
     public function items(){
