@@ -6,6 +6,7 @@ class Devices_model extends CI_Model{
     //获取内容
     function getContent($limit="",$offset=""){
         $this->db->limit($limit,($offset-1)*($limit));
+        $this->db->order_by('login_time','desc');
         $result = $this->db->get('devices');
         return $result->result();
     }

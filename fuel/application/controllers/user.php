@@ -48,5 +48,11 @@ class User extends Base{
         $data['statusVal'] = self::$statusVal;
         $this->load->view("user/userinfo",$data);
     }  
+    public function add(){
+        $this->load->view('user/modfiy',array("statusVal"=>self::$statusVal));
+    }
+    public function edit(){
+        $this->load->view('user/modfiy',array("statusVal"=>self::$statusVal));
+    }
 }
 ?>

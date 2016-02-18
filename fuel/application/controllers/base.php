@@ -1,12 +1,15 @@
 <?php 
 class Base extends CI_Controller{
+    //分页的每页记录个数
     public $per_page = 10;
+    //当前用户名称
     public $username = "";
     function __construct(){
         parent::__construct();
         $this->load->helper('cookie');
+        //通过Cookies检测是否登录
         $this->check_user_status();
-        $this->load->library('pagination');
+        //读取Session中的用户名
         $this->username = $this->session->userdata('username');
         // $this->migrate();
     }

@@ -6,6 +6,7 @@ class Print_log_model extends CI_Model{
     //获取内容
     function getContent($limit="",$offset=""){
         $this->db->limit($limit,($offset-1)*($limit));
+        $this->db->order_by('id','desc');
         $result = $this->db->get('print_log');
         return $result->result();
     }
