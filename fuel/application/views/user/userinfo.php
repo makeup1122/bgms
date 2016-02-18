@@ -6,7 +6,7 @@
 </head>
 <body>
     <form action="/user/userinfo" method="post">
-    <input type="text" name="username" value="<?php echo $userinfo->username;?>">
+    <input type="text" name="username" value="<?php echo $userinfo->username;?>" disabled>
     <input type="password" name="password" value="<?php echo $userinfo->password?>">
     <input type="text" name="mobile" value="<?php echo $userinfo->mobile?>">
     <input type="text" name="email" value="<?php echo $userinfo->email?>">

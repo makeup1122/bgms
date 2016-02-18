@@ -7,11 +7,8 @@ class Index extends Base{
         // $this->load->
     }
     public function index(){
-        $this->load->view("common/_head");
-        $this->load->view("common/_top");
-        $this->load->view("common/_left");
         $this->load->view("index/index");
-        $this->load->view("common/_footer");
+        parent::_after_index();
     }
     public function error_404(){
     }

@@ -10,6 +10,7 @@ class User_model extends CI_Model{
         }
         return true;
     }
+    //获取用户ID
     function getUserID($username){
         $result =  $this->db->select("id")->get_where("user",array('username'=>$username));
         return $result->result()[0]->id;

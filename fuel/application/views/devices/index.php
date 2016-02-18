@@ -91,7 +91,10 @@
       }
     });
   }
-  getDevices("");
+  $(function(){
+    getDevices("");    
+  })
+  
   
   //绑定页面跳转事件
             $(".pagination").on('click', 'a', function() {

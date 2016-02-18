@@ -6,7 +6,7 @@
         <ul id="main-menu" class="nav navbar-nav navbar-right">
             <li class="dropdown hidden-xs">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-user padding-right-small" style="position:relative;top: 3px;"></span>李冰&nbsp;<i class="fa fa-caret-down"></i>
+                    <span class="glyphicon glyphicon-user padding-right-small" style="position:relative;top: 3px;"></span><?php echo $username; ?>&nbsp;<i class="fa fa-caret-down"></i>
                 </a>
 
                 <ul class="dropdown-menu">
