@@ -27,7 +27,7 @@
     <form class='login' method="post" action="/user/login">
         <input type="text" name="username">
         <input type="password" name="password">
-        <i><?php echo $errMsg;?></i>
+        <i><?php if(!empty($errMsg)){echo $errMsg;}?></i>
         <input type="submit" name="submit" value="登录">
     </form>
 </body>

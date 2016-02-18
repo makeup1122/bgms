@@ -8,7 +8,8 @@ class User extends Base{
     }
     //用户首页
     public function index(){
-        $this->load->view("user/login");
+        parent::_after_index();
+        $this->load->view("user/index");
     }
     //用户登录
     public function login(){
