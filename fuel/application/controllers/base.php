@@ -17,7 +17,7 @@ class Base extends CI_Controller{
     public function _after_index(){
         $this->load->view("common/_head");
         $this->load->view("common/_top",array("username"=>$this->username));
-        $this->load->view("common/_left");
+        $this->load->view("common/_left",array("controller"=>$this->uri->segment(1)));
         $this->load->view("common/_footer");
     }
     //检测用户在线状态

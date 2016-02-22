@@ -87,7 +87,7 @@ CREATE TABLE `print_log` (
 CREATE TABLE `user` (
   `id` int(11) NOT NULL COMMENT '用户ID',
   `username` varchar(12) DEFAULT NULL COMMENT '用户名',
-  `password` varchar(64) DEFAULT NULL COMMENT '密码',
+  `password` varchar(128) DEFAULT NULL COMMENT '密码',
   `verify` varchar(6) DEFAULT NULL COMMENT '随机盐',
   `email` varchar(64) DEFAULT NULL COMMENT '邮箱',
   `mobile` varchar(14) DEFAULT NULL COMMENT '手机号码',

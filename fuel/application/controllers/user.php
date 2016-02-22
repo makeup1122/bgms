@@ -18,11 +18,11 @@ class User extends Base{
             $password = $this->input->post("password");
             if($this->model->login($username,$password)){//登录成功
                 $uid = $this->model->getUserID($username);
-                set_cookie("bgms-userid",$uid, 3600);
+                set_cookie("bgms-userid",$uid, 86400);
                 $this->session->set_userdata(array("uid"=>$uid,"username"=>$username));
                 redirect("index/content");
             }else{
-                $this->load->view("user/login",array("errMsg"=>"账户名或密码错误!"));
+                $this->load->view("user/login",array("errMsg"=>$this->model->getErrMsg()));
             }
         }else{
             $this->load->view("user/login");
@@ -41,18 +41,37 @@ class User extends Base{
                 echo "更新错误!";
             }
         }
-        else{
-            $userinfo = $this->user->userinfo(get_cookie("bgms-userid"));
-        }
+        $userinfo = $this->model->userinfo(get_cookie("bgms-userid"));
         $data['userinfo'] = $userinfo;
         $data['statusVal'] = self::$statusVal;
+        parent::_after_index();
         $this->load->view("user/userinfo",$data);
     }  
+    //新增用户
     public function add(){
-        $this->load->view('user/modfiy',array("statusVal"=>self::$statusVal));
+        if(!empty($_POST)){
+            $userinfo = $this->input->post();
+            if($userinfo['password'] === $userinfo['repassword']){
+                unset($userinfo['repassword']);
+            }else{
+                echo "密码不正确!";
+            }
+            if(!$this->model->add($userinfo)){
+                echo "新增错误!";
+            }
+            redirect('user/index');
+        }else{
+            parent::_after_index();
+            $this->load->view('user/add',array("statusVal"=>self::$statusVal));  
+        }
     }
+    //编辑用户
     public function edit(){
         $this->load->view('user/modfiy',array("statusVal"=>self::$statusVal));
+    }
+    //删除用户
+    public function delete(){
+        
     }
 }
 ?>
