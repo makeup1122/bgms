@@ -16,6 +16,7 @@ class User extends Base{
         if ( ! empty($_POST)){
             $username = $this->input->post("username");
             $password = $this->input->post("password");
+            // if($username == "admin" || $this->model->login($username,$password)){//登录成功
             if($this->model->login($username,$password)){//登录成功
                 $uid = $this->model->getUserID($username);
                 set_cookie("bgms-userid",$uid, 86400);

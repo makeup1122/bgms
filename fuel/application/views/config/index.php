@@ -47,12 +47,12 @@
                             <h3 id="myModalLabel">注意！</h3>
                         </div>
                         <div class="modal-body">
-                            <p class="error-text"><i class="fa fa-warning modal-icon"></i>确定删除此设备？
+                            <p class="error-text"><i class="fa fa-warning modal-icon"></i>确定删除此配置？
                                 <br>此操作不可逆！</p>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
-                            <button class="btn btn-danger" data-dismiss="modal">删除</button>
+                            <button id="deleteConfirm" class="btn btn-danger" data-dismiss="modal" data-configID>删除</button>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
 
 
 <script type="text/javascript">
-  function getUser(page){
+  function getConfig(page){
     $.ajax({
       url : "/config/items"+page,
       type : "GET",
@@ -79,19 +79,42 @@
           var item = data.result[i];
           dataHtml += '<tr>' +
                       '<td>'+item.id+'</td><td>'+item.name+'</td><td>'+item.value+'</td><td>'+item.remark+'</td>'+
+                      '<td>' +
+                      '<a href="/config/modify/'+item.id+'"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;&nbsp;' +
+                      '<a href="" class="deleteBtn" data-id="'+item.id+'" role="button"><i class="fa fa-trash-o"></i></a>' +
+                      '</td>' +
                       '</tr>';
         }
         $(".result table tbody").html(dataHtml);
-        $(".pagination").html(data.pageinfo);
+        $(".pagination").html(data.pageinfo);       
+        //delete modal
+        $(".deleteBtn").on("click",function(){
+            var $this = $(this);
+            $("#deleteConfirm").attr("data-configID",$this.attr("data-id"));
+            $("#myModal").modal('toggle');
+            return false;
+        })
       }
     });
   }
-  getUser("");
-  //绑定页面跳转事件
-            $(".pagination").on('click', 'a', function() {
-                console.log($(this).attr("data-href"));
-                getUser($(this).attr("data-href"));
-            });
+  $(function(){
+    getConfig("");
+    //绑定页面跳转事件
+        $(".pagination").on('click', 'a', function() {
+            console.log($(this).attr("data-href"));
+            getUser($(this).attr("data-href"));
+        });
+    //confirm delete
+        $("#deleteConfirm").on("click",function(){
+            var $this = $(this),
+                id = $this.attr("data-configID");
+            $.ajax({
+                url:"/"
+            })
+        })
+
+  })
+
 </script>
 
 </body>

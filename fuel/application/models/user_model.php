@@ -16,8 +16,10 @@ class User_model extends CI_Model{
            return false; 
         }else{
             $userinfo = $result->result()[0];
-            echo $userinfo->verify;
+            // echo $userinfo->verify;
             $dbpasswd = $this->encrypt->decode($userinfo->password,$userinfo->verify);
+            echo $dbpasswd;
+            echo $userinfo->verify;
             if(!($passwd === $dbpasswd)){
                 $this->errMsg = "密码不正确!";
                 return false;

@@ -3,7 +3,7 @@
 
 <body class=" theme-blue">
 
-    <div class="content">
+    <div class="content print_log">
         <div class="header">
 
             <h1 class="page-title">打印日志</h1>
