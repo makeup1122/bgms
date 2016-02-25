@@ -18,8 +18,8 @@ class User_model extends CI_Model{
             $userinfo = $result->result()[0];
             // echo $userinfo->verify;
             $dbpasswd = $this->encrypt->decode($userinfo->password,$userinfo->verify);
-            echo $dbpasswd;
-            echo $userinfo->verify;
+            // echo $dbpasswd;
+            // echo $userinfo->verify;
             if(!($passwd === $dbpasswd)){
                 $this->errMsg = "密码不正确!";
                 return false;
@@ -63,6 +63,15 @@ class User_model extends CI_Model{
         if(empty($userinfo) && $userinfo['id'] <=0){
             return false;
         }
+        //如果密码字段为空，则不更新密码
+        if($userinfo['password'] == ""){
+            unset($userinfo['password']);
+            unset($userinfo['repassword']);
+        }else{//否则更新电脑
+            $this->db->select('verify');
+            $verify = $this->db->get_where('user', array('id'=> $userinfo['id']));
+            $userinfo['password'] = $this->encrypt->encode($userinfo['password'],$verify->result()[0]->verify);
+        }
         $userinfo['update_time'] = date("Y-m-d H:i:s",strtotime('now'));
         $this->db->where('id', $userinfo['id']);
         $this->db->update('user', $userinfo); 
@@ -85,6 +94,32 @@ class User_model extends CI_Model{
     //获取错信息
     function getErrMsg(){
         return $this->errMsg;
+    }
+    //删除指定($id)记录
+    function deleteOne($id){
+        //$id 不能为空
+        if(empty($id)){$this->errReturn("未指定ID!");}
+        //判断指定内容是否存在
+        if($this->isExist($id)){
+            //删除指定内容
+            $this->db->delete('user',array('id'=>$id)); 
+            if($this->db->affected_rows() != 1){
+                $this->errReturn("删除错误!");
+            }else{
+                return true;
+            }
+        }else{
+            $this->errReturn("指定ID不存在!");
+        }
+    }
+    //指定($id)记录是否存在
+    function isExist($id){
+        $result = $this->db->get_where('user',array('id' => $id));
+        return $result->num_rows() == 1?true:false;
+    }
+    function errReturn($msg){
+        $this->errMsg = $msg;
+        return false;
     }
 }
 ?>

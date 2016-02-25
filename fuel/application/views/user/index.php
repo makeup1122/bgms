@@ -94,11 +94,11 @@
         var dataHtml = "";
         for (var i = 0; i < data.result.length; i++) {
           var item = data.result[i];
-          dataHtml += '<tr>' +
+          dataHtml += '<tr class="user" data-id="'+item.id+'">' +
                       '<td>'+item.id+'</td><td>'+item.username+'</td><td>'+item.email+'</td><td>'+item.mobile+'</td><td>'+item.status+'</td><td>'+item.remark+'</td><td>'+item.create_time+'</td><td>'+item.update_time+'</td><td>'+item.last_login_time+'</td><td>'+item.last_login_ip+'</td><td>'+item.role_id+'</td>'+
                       '<td>' +
-                      '<a href="/user/modify/'+item.id+'"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;&nbsp;' +
-                      '<a href="" class="deleteBtn" data-id="'+item.id+'" role="button"><i class="fa fa-trash-o"></i></a>' +
+                      '<a href="/user/edit/'+item.id+'"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;&nbsp;' +
+                      '<a href="/user/delete/'+item.id+'" class="deleteBtn" data-id="'+item.id+'" role="button"><i class="fa fa-trash-o"></i></a>' +
                       '</td>' +
                       '</tr>';
         }
@@ -128,7 +128,14 @@
             type:"GET",
             dataType:"json",
             success:function(data){
-                
+                console.log(data);
+                console.log(id);
+                if(data.state){
+                    console.log($(".user[data-id='"+id+"']").data('id'));
+                    $(".user[data-id='"+id+"']").remove();
+                }else{
+                    alert(data.errMsg);
+                }
             }
         })
     });

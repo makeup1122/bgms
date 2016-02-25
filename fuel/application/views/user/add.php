@@ -62,7 +62,7 @@
                                     </select>
                                 </div>
                                 <div class="btn-toolbar list-toolbar">
-                                    <input type="submit" value="提交修改" class="btn btn-primary">
+                                    <input type="submit" value="提交" class="btn btn-primary">
                                 </div>
                             </form>
 

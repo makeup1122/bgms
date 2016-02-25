@@ -54,6 +54,10 @@ class Base extends CI_Controller{
     //状态检查
     public function checkStatus(){
     }
+    public function returnAjax($state,$msg=""){
+        echo json_encode(array('state'=>$state,'errMsg'=>$msg));
+        exit;
+    }
     public function migration(){
         // $this->
     }
@@ -64,6 +68,5 @@ class Base extends CI_Controller{
             show_error($this->migration->error_string());
         }
     }
-    
 }
 ?>    

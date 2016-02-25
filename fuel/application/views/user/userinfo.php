@@ -5,7 +5,7 @@
         <h1 class="page-title">用户</h1>
         <ul class="breadcrumb">
             <li><a href="/">主页</a> </li>
-            <li class="active">当前用户信息</li>
+            <li class="active">用户信息</li>
         </ul>
 
         </div>
@@ -27,15 +27,19 @@
         </div>
         <div class="form-group">
         <label>ID</label>
-    <input type="text" name="id" class="form-control" value="<?php if(isset($userinfo->id)){echo $userinfo->id;}?>" hidden>
+    <input type="text" name="id" class="form-control" value="<?php if(isset($userinfo->id)){echo $userinfo->id;}?>" disabled>
         </div>
         <div class="form-group">
         <label>用户名</label>
     <input type="text" name="username" class="form-control" value="<?php if(isset($userinfo->username)){echo $userinfo->username;}?>" required>
         </div>
         <div class="form-group">
-        <label>密码</label>
-    <input type="password" name="password" class="form-control" value="<?php if(isset($userinfo->password)){echo $userinfo->password;}?>">
+        <label>输入密码</label>
+    <input type="password" name="password" class="form-control" value="">
+        </div>
+        <div class="form-group">
+        <label>确认密码</label>
+    <input type="password" name="repassword" class="form-control" value="">
         </div>
         <div class="form-group">
         <label>手机号</label>
@@ -64,6 +68,7 @@
             </select>
           </div>
         <div class="btn-toolbar list-toolbar">
+            <input type="text" name="id" value="<?php if(isset($userinfo->id)){echo $userinfo->id;}?>" hidden>
           <input type="submit" value="提交修改" class="btn btn-primary">
           <!--<a href="#myModal" data-toggle="modal" class="btn btn-danger">Delete</a>-->
         </div>
