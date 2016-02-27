@@ -77,10 +77,10 @@
         var dataHtml = "";
         for (var i = 0; i < data.result.length; i++) {
           var item = data.result[i];
-          dataHtml += '<tr>' +
+          dataHtml += '<tr class="config" data-id="'+item.id+'">' +
                       '<td>'+item.id+'</td><td>'+item.name+'</td><td>'+item.value+'</td><td>'+item.remark+'</td>'+
                       '<td>' +
-                      '<a href="/config/modify/'+item.id+'"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;&nbsp;' +
+                      '<a href="/config/edit/'+item.id+'"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;&nbsp;' +
                       '<a href="" class="deleteBtn" data-id="'+item.id+'" role="button"><i class="fa fa-trash-o"></i></a>' +
                       '</td>' +
                       '</tr>';
@@ -109,7 +109,19 @@
             var $this = $(this),
                 id = $this.attr("data-configID");
             $.ajax({
-                url:"/"
+                url:"/config/delete/"+id,
+            type:"GET",
+            dataType:"json",
+            success:function(data){
+                console.log(data);
+                console.log(id);
+                if(data.state){
+                    console.log($(".config[data-id='"+id+"']").data('id'));
+                    $(".config[data-id='"+id+"']").remove();
+                }else{
+                    alert(data.errMsg);
+                }
+            }
             })
         })
 

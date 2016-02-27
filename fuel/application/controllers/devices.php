@@ -21,7 +21,7 @@ class Devices extends Base{
     * @param $id  设备ID
     * @return bool
     */  
-    public function delete(){
+    public function deleteOne(){
         echo $this->model->delete($this->uri->segment(3));
     }
 }

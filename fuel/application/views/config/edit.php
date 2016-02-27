@@ -2,10 +2,10 @@
     <div class="content">
         <div class="header">
 
-            <h1 class="page-title">添加用户</h1>
+            <h1 class="page-title">修改配置项</h1>
             <ul class="breadcrumb">
                 <li><a href="/">主页</a> </li>
-                <li class="active">添加用户</li>
+                <li class="active">修改配置项信息</li>
             </ul>
 
         </div>
@@ -20,48 +20,29 @@
                     <br>
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane active in" id="home">
-                            <form action="/user/add" method="post">
+                            <form action="/config/edit" method="post">
                                 <!--    <div class="form-group">-->
                                 <!--    <label>ID</label>-->
                                 <!--<input type="text" name="id" class="form-control" value="" hidden>-->
                                 <!--    </div>-->
                                 <div class="form-group">
-                                    <label>用户名</label>
-                                    <input type="text" name="username" class="form-control" value="" required>
+                                    <label>ID</label>
+                                    <input type="text" name="id" class="form-control" value="<?php if(isset($config->id)){echo $config->id;} ?>" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label>输入密码</label>
-                                    <input type="password" name="password" class="form-control" value="">
+                                    <label>配置名称</label>
+                                    <input type="text" name="name" class="form-control" value="<?php if(isset($config->name)){echo $config->name;} ?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>确认密码</label>
-                                    <input type="password" name="repassword" class="form-control" value="">
+                                    <label>配置值</label>
+                                    <input type="text" name="value" class="form-control" value="<?php if(isset($config->value)){echo $config->value;} ?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>手机号</label>
-                                    <input type="text" name="mobile" class="form-control" value="">
-                                </div>
-                                <div class="form-group">
-                                    <label>电子邮箱</label>
-                                    <input type="text" name="email" class="form-control" value="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>备注</label>
-                                    <textarea name="remark" value="" rows="3" class="form-control"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>角色</label>
-                                    <input type="text" name="role_id" class="form-control" value="1" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label>状态</label>
-                                    <select name="status" class="form-control">
-                                        <?php foreach ($statusVal as $key=>$item): echo "
-                                        <option value='".$key."'>".$item."</option>"; endforeach?>
-                                    </select>
+                                    <label>说明</label>
+                                    <input type="text" name="remark" class="form-control" value="<?php if(isset($config->remark)){echo $config->remark;} ?>" required>
                                 </div>
                                 <div class="btn-toolbar list-toolbar">
+                                    <input type="text" name="id" value="<?php if(isset($config->id)){echo $config->id;} ?>" hidden>
                                     <input type="submit" value="提交" class="btn btn-primary">
                                 </div>
                             </form>
@@ -81,7 +62,7 @@
                             <h3 id="myModalLabel">注意！</h3>
                         </div>
                         <div class="modal-body">
-                            <p class="error-text"><i class="fa fa-warning modal-icon"></i>确定删除此设备？
+                            <p class="error-text"><i class="fa fa-warning modal-icon"></i>确定删除此配置项？
                                 <br>此操作不可逆！</p>
                         </div>
                         <div class="modal-footer">

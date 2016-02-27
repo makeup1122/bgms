@@ -2,6 +2,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta charset="utf-8">
 <title>Error</title>
 <style>
 html,body { margin: 20px 0 10px 0; padding: 0; }

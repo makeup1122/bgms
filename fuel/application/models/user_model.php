@@ -10,26 +10,35 @@ class User_model extends CI_Model{
     }
     //登陆验证
     function login($username,$passwd){
+        //判断账号是否存在
         $result = $this->db->get_where("user",array('username'=>$username));
         if(empty($result->result())){
            $this->errMsg = "账号不存在!";
            return false; 
-        }else{
+        }else{//验证账号
             $userinfo = $result->result()[0];
-            // echo $userinfo->verify;
+            //验证密码
             $dbpasswd = $this->encrypt->decode($userinfo->password,$userinfo->verify);
-            // echo $dbpasswd;
-            // echo $userinfo->verify;
             if(!($passwd === $dbpasswd)){
                 $this->errMsg = "密码不正确!";
                 return false;
             }
+            //验证状态
             if($userinfo->status != "0"){
                 $this->errMsg = "账号已被停用!";
                 return false;
             }
         }
+        //更新登陆状态
+        $this->updateLoginInfo($userinfo);
         return true;
+    }
+    //更新登陆状态
+    function  updateLoginInfo($userinfo){
+        $Info['last_login_time'] = date("Y-m-d H:i:s",strtotime('now'));
+        $Info['last_login_ip'] = $_SERVER["REMOTE_ADDR"];
+        $this->db->where('id', $userinfo->id);
+        $this->db->update('user', $Info); 
     }
     //获取用户ID
     function getUserID($username){
@@ -82,9 +91,14 @@ class User_model extends CI_Model{
         }
     }
     //获取内容
-    function getContent($limit="",$offset=""){
+    function getContent($limit="",$offset="",$where=""){
+        if(!empty($where)){
+            $this->db->like($where);
+            // $this->db->where($where);
+        }
         $this->db->limit($limit,($offset-1)*($limit));
         $result = $this->db->get('user');
+        // echo $this->db->last_query();
         return $result->result();
     }
     //获取当前表记录总数
@@ -97,8 +111,6 @@ class User_model extends CI_Model{
     }
     //删除指定($id)记录
     function deleteOne($id){
-        //$id 不能为空
-        if(empty($id)){$this->errReturn("未指定ID!");}
         //判断指定内容是否存在
         if($this->isExist($id)){
             //删除指定内容

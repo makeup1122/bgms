@@ -32,7 +32,8 @@ class Base extends CI_Controller{
     }
     //获取对应表的数据记录
     public function items(){
-        $where = $this->input->get();
+        $where = $this->search();
+        // var_dump($where);
         $total_rows = $this->model->count_all();
         $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->per_page; 
@@ -44,20 +45,33 @@ class Base extends CI_Controller{
         $this->pagination->initialize($config);
         $pageinfo = $this->pagination->create_links();
         $pageinfo = str_replace("href"," href='#' data-href",$pageinfo);
-        $result = $this->model->getContent($config['per_page'],$this->uri->segment(3));
+        $result = $this->model->getContent($config['per_page'],$this->uri->segment(3),$where);
         echo json_encode(array("result"=>$result,"pageinfo"=>$pageinfo));
     }
     //组合搜索条件
     public function search(){
-        $where = $this->input->get();
+        $data = $this->input->get();
+        if(empty($data)){return null;}
+        $where = array();
+        //select条件
+        switch($data['condition']){
+            case 1:$where['username'] = $data['keyword'];break;
+            case 2:$where['id'] = $data['keyword'];break;
+            case 3:$where['mobile'] = $data['keyword'];break;
+            case 4:$where['email'] = $data['keyword'];break;
+        }
+        $where['status'] = $data['status'];
+        return $where;
     }
     //状态检查
     public function checkStatus(){
     }
+    //Ajax返回函数，返回json类型数据
     public function returnAjax($state,$msg=""){
         echo json_encode(array('state'=>$state,'errMsg'=>$msg));
         exit;
     }
+    //数据迁移相关
     public function migration(){
         // $this->
     }

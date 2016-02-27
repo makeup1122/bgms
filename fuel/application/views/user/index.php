@@ -23,10 +23,26 @@
                 </div>
             </div>
             <div class="search-well">
-                    <form class="form-inline" style="margin-top:0px;">
-                        <input class="input-xlarge form-control" placeholder="用户名" id="" type="text">
-                        <input class="input-xlarge form-control" placeholder="状态" id="" type="text">
-                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i> 查找</button>
+                    <form class="form-inline form_search" style="margin-top:0px;" action="/user/items" method="get">
+                        <label for="">条件：</label>
+                        <select name="condition">
+                            <option value="1">用户名</option>
+                            <option value="2">ID</option>
+                            <option value="3">手机号</option>
+                            <option value="4">邮箱</option>
+                        </select>
+                        <lable>关键字：</lable>
+                        <input name="keyword" class="input-xlarge form-control" placeholder="关键字" id="" type="text" value="<?php echo isset($_GET['keyword'])?$_GET['keyword']:""; ?>">
+                        <!--<input class="input-xlarge form-control" placeholder="状态" id="" type="text">-->
+                        <lable>状态：</lable>
+                        <select name="status">
+                            <?php
+                                foreach($statusVal as $k=>$v){
+                                    echo "<option value=".$k.">".$v."</option>";
+                                }
+                            ?>
+                        </select>
+                        <button class="btn btn-default" type="button" onclick="getUser('',true)"><i class="fa fa-search"></i> 查找</button>
                     </form>
                 </div>
             <table class="table">
@@ -65,7 +81,7 @@
                             <h3 id="myModalLabel">注意！</h3>
                         </div>
                         <div class="modal-body">
-                            <p class="error-text"><i class="fa fa-warning modal-icon"></i>确定删除此设备？
+                            <p class="error-text"><i class="fa fa-warning modal-icon"></i>确定删除此用户？
                                 <br>此操作不可逆！</p>
                         </div>
                         <div class="modal-footer">
@@ -84,10 +100,17 @@
         </div>
 
 <script type="text/javascript">
-  function getUser(page){
+   /////碉堡了
+   var statusArray = <?php echo json_encode($statusVal); ?> ;
+  function getUser(page,ifSearch){
+      var data = "";
+      if(ifSearch){
+          data = $(".form_search").serialize();
+      }
     $.ajax({
       url : "/user/items" + page,
       type : "GET",
+      data : data,
       dataType : "json",
       success : function(data) {
         // console.log(data);
@@ -95,7 +118,7 @@
         for (var i = 0; i < data.result.length; i++) {
           var item = data.result[i];
           dataHtml += '<tr class="user" data-id="'+item.id+'">' +
-                      '<td>'+item.id+'</td><td>'+item.username+'</td><td>'+item.email+'</td><td>'+item.mobile+'</td><td>'+item.status+'</td><td>'+item.remark+'</td><td>'+item.create_time+'</td><td>'+item.update_time+'</td><td>'+item.last_login_time+'</td><td>'+item.last_login_ip+'</td><td>'+item.role_id+'</td>'+
+                      '<td>'+item.id+'</td><td>'+item.username+'</td><td>'+item.email+'</td><td>'+item.mobile+'</td><td>'+statusArray[item.status]+'</td><td>'+item.remark+'</td><td>'+item.create_time+'</td><td>'+item.update_time+'</td><td>'+item.last_login_time+'</td><td>'+item.last_login_ip+'</td><td>'+item.role_id+'</td>'+
                       '<td>' +
                       '<a href="/user/edit/'+item.id+'"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;&nbsp;' +
                       '<a href="/user/delete/'+item.id+'" class="deleteBtn" data-id="'+item.id+'" role="button"><i class="fa fa-trash-o"></i></a>' +
@@ -113,7 +136,7 @@
       }
     });
   }
-  getUser("");
+  getUser("",false);
     //绑定页面跳转事件
     $(".pagination").on('click', 'a', function() {
         console.log($(this).attr("data-href"));

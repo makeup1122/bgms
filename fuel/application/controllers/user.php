@@ -9,7 +9,7 @@ class User extends Base{
     //用户首页
     public function index(){
         parent::_after_index();
-        $this->load->view("user/index");
+        $this->load->view("user/index",array('statusVal'=>self::$statusVal));
     }
     //用户登录
     public function login(){
@@ -19,7 +19,7 @@ class User extends Base{
             // if($username == "admin" || $this->model->login($username,$password)){//登录成功
             if($this->model->login($username,$password)){//登录成功
                 $uid = $this->model->getUserID($username);
-                set_cookie("bgms-userid",$uid, 86400);
+                set_cookie("bgms-userid",$uid, 3600);
                 $this->session->set_userdata(array("uid"=>$uid,"username"=>$username));
                 redirect("index/content");
             }else{
@@ -57,6 +57,7 @@ class User extends Base{
     //新增用户
     public function add(){
         if(!empty($_POST)){
+            // show_error('消息');
             $userinfo = $this->input->post();
             if($userinfo['password'] === $userinfo['repassword']){
                 unset($userinfo['repassword']);
@@ -88,6 +89,8 @@ class User extends Base{
     public function delete(){
         //获取ID参数
         $id = $this->uri->segment(3);
+        //$id 不能为空
+        if(empty($id)){$this->returnAjax(false,"未指定ID!");}
         //自己无法删除自己啊大哥....
         if($this->isSelf($id)){
             $this->returnAjax(false,"无法删除自己的帐号!");
