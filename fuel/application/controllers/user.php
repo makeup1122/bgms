@@ -59,6 +59,10 @@ class User extends Base{
         if(!empty($_POST)){
             // show_error('消息');
             $userinfo = $this->input->post();
+            if(!isset($userinfo['password']) || empty($userinfo['password'])){
+                show_error("密码不能为空!");
+                // redirect('user/add');
+            }
             if($userinfo['password'] === $userinfo['repassword']){
                 unset($userinfo['repassword']);
             }else{

@@ -7,6 +7,7 @@ class Base extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->helper('cookie');
+        // $this->load->helper('url');
         //通过Cookies检测是否登录
         $this->check_user_status();
         //读取Session中的用户名
@@ -34,7 +35,7 @@ class Base extends CI_Controller{
     public function items(){
         $where = $this->search();
         // var_dump($where);
-        $total_rows = $this->model->count_all();
+        $total_rows = $this->model->count_all($where);
         $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->per_page; 
         $config['use_page_numbers'] = TRUE;
@@ -54,13 +55,29 @@ class Base extends CI_Controller{
         if(empty($data)){return null;}
         $where = array();
         //select条件
+        if(!empty($data['keyword'])){
         switch($data['condition']){
             case 1:$where['username'] = $data['keyword'];break;
             case 2:$where['id'] = $data['keyword'];break;
             case 3:$where['mobile'] = $data['keyword'];break;
             case 4:$where['email'] = $data['keyword'];break;
+            case 5:$where['id_num'] = $data['keyword'];break;
+            case 6:$where['name'] = $data['keyword'];break;
+            case 7:$where['people_num'] = $data['keyword'];break;
         }
-        $where['status'] = $data['status'];
+        }
+        if(isset($data['sex'])){
+            switch($data['sex']){
+                case 1:$where['sex'] = "男";break;
+                case 2:$where['sex'] = "女";break;
+                // case 3:$where['sex'] = " ";break;
+            }
+        }
+        if(isset($data['status'])){$where['status'] = $data['status'];}
+        if(isset($data['idtype'])){$where['idtype'] = $data['idtype'];}
+        if(isset($data['result'])){$where['result'] = $data['result'];}
+        if(isset($data['print_type'])){$where['print_type'] = $data['print_type'];}
+        // var_dump($where);
         return $where;
     }
     //状态检查

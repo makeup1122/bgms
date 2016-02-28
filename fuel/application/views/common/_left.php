@@ -12,7 +12,13 @@
         <li>
             <ul class="accounts-menu nav nav-list collapse <?php echo (isset($controller)&&($controller =='print_log'))?"in":"" ?>">
                 <li class="<?php echo (isset($controller)&&($controller =='print_log')&&(null!==$this->uri->segment(2))&&($this->uri->segment(2) =='index'))?"active":"" ?>">
-                    <a href="/print_log/index"><span class="fa fa-caret-right"></span> 打印日志列表</a>
+                    <a href="/print_log/index"><span class="fa fa-caret-right"></span> 日志列表</a>
+                </li>
+                <!--<li ><a href="sign-up.html"><span class="fa fa-caret-right"></span> 添加打印日志</a></li>-->
+            </ul>
+            <ul class="accounts-menu nav nav-list collapse <?php echo (isset($controller)&&($controller =='print_log'))?"in":"" ?>">
+                <li class="<?php echo (isset($controller)&&($controller =='print_log')&&(null!==$this->uri->segment(2))&&($this->uri->segment(2) =='statistics'))?"active":"" ?>">
+                    <a href="/print_log/statistics"><span class="fa fa-caret-right"></span> 统计查询</a>
                 </li>
                 <!--<li ><a href="sign-up.html"><span class="fa fa-caret-right"></span> 添加打印日志</a></li>-->
             </ul>

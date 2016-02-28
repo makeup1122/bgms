@@ -103,7 +103,11 @@ class User_model extends CI_Model{
         return $result->result();
     }
     //获取当前表记录总数
-    function count_all(){
+    function count_all($where=""){
+        if(!empty($where)){
+            $this->db->like($where);
+            // $this->db->where($where);
+        }
         return $this->db->count_all_results('user');
     }
     //获取错信息

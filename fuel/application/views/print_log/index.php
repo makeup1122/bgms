@@ -12,6 +12,54 @@
                 <li class="active">打印日志列表</li>
             </ul>
         </div>
+        <div class="search-well">
+                    <form class="form-inline form_search" style="margin-top:0px;" action="/user/items" method="get">
+                        <label for="">条件：</label>
+                        <select name="condition">
+                            <!--<option value="1">用户名</option>-->
+                            <!--<option value="2">ID</option>-->
+                            <!--<option value="3">手机号</option>-->
+                            <!--<option value="4">邮箱</option>-->
+                            <option value="5">证件号码</option>
+                            <option value="6">姓名</option>
+                            <option value="7">人数</option>
+                            
+                        </select>
+                        <lable>关键字：</lable>
+                        <input name="keyword" class="input-xlarge form-control" placeholder="关键字" id="" type="text" value="<?php echo isset($_GET['keyword'])?$_GET['keyword']:""; ?>">
+                        <!--<input class="input-xlarge form-control" placeholder="状态" id="" type="text">-->
+                        <label for="sexCondition">性别</label>
+                        <select name="sex" id="sexCondition">
+                            <option value="1">男</option>
+                            <option value="2">女</option>
+                            <option value="3">其他</option>
+                        </select>
+                        <label for="idtypeCondition">证件类型</label>
+                        <select name="idtype" id="idtypeCondition">
+                            <option value="身份证">身份证</option>
+                            <option value="学生证">学生证</option>
+                            <option value="其他">其他证件</option>
+                        </select>
+                        <label for="printTypeCondition">打印类型</label>
+                        <select name="print_type" id="printTypeCondition">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <label for="resultCondition">打印结果</label>
+                        <select name="result" id="idresultConditiontypeCondition">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        <input type="text" data-search="1" class="search" hidden>
+                        <button class="btn btn-default" type="button" onclick="searchFunc()"><i class="fa fa-search"></i> 查找</button>
+                        <button class="btn btn-default" type="button" onclick="unsearchFunc()"><i class="fa fa-search"></i> 清除</button>
+                    </form>
+                </div>
         <div class="main-content result">
             <div class="btn-toolbar list-toolbar">
                 <div class="btn-group">
@@ -73,10 +121,25 @@
 
 
         <script type="text/javascript">
+         function searchFunc(){
+       $(".search").attr('data-search','2');
+       getPrintLogs('');
+   }
+   function unsearchFunc(){
+       $(".form_search")[0].reset();
+       $(".search").attr('data-search','1');
+       getPrintLogs('');
+   }
             function getPrintLogs(page) {
+                  var data = "";
+      if($(".search").attr('data-search') === '2'){
+        //   console.log("D");
+          data = $(".form_search").serialize();
+      }
                 $.ajax({
                     url: "/print_log/items" + page,
                     type: "GET",
+                    data : data,
                     dataType: "json",
                     success: function(data) {
                         // console.log(data);

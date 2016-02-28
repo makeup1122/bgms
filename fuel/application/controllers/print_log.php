@@ -9,5 +9,9 @@ class Print_log extends Base{
         parent::_after_index();
         $this->load->view("print_log/index");
     }
+    //统计查询
+    public function statistics(){
+        parent::_after_index();
+    }
 }
 ?>

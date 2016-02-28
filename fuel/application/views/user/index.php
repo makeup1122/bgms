@@ -42,7 +42,9 @@
                                 }
                             ?>
                         </select>
-                        <button class="btn btn-default" type="button" onclick="getUser('',true)"><i class="fa fa-search"></i> 查找</button>
+                        <input type="text" data-search="1" class="search" hidden>
+                        <button class="btn btn-default" type="button" onclick="searchFunc()"><i class="fa fa-search"></i> 查找</button>
+                        <button class="btn btn-default" type="button" onclick="unsearchFunc()"><i class="fa fa-search"></i> 清除</button>
                     </form>
                 </div>
             <table class="table">
@@ -102,9 +104,19 @@
 <script type="text/javascript">
    /////碉堡了
    var statusArray = <?php echo json_encode($statusVal); ?> ;
-  function getUser(page,ifSearch){
+   function searchFunc(){
+       $(".search").attr('data-search','2');
+       getUser('');
+   }
+   function unsearchFunc(){
+       $(".form_search")[0].reset();
+       $(".search").attr('data-search','1');
+       getUser('');
+   }
+  function getUser(page){
       var data = "";
-      if(ifSearch){
+      if($(".search").attr('data-search') === '2'){
+        //   console.log("D");
           data = $(".form_search").serialize();
       }
     $.ajax({
