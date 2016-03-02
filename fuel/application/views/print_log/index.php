@@ -1,8 +1,3 @@
-<!doctype html>
-<html lang="cn">
-
-<body class=" theme-blue">
-
     <div class="content print_log">
         <div class="header">
 
@@ -15,7 +10,7 @@
         <div class="search-well">
                     <form class="form-inline form_search" style="margin-top:0px;" action="/user/items" method="get">
                         <label for="">条件：</label>
-                        <select name="condition">
+                        <select name="condition" class="form-control">
                             <!--<option value="1">用户名</option>-->
                             <!--<option value="2">ID</option>-->
                             <!--<option value="3">手机号</option>-->
@@ -28,36 +23,42 @@
                         <lable>关键字：</lable>
                         <input name="keyword" class="input-xlarge form-control" placeholder="关键字" id="" type="text" value="<?php echo isset($_GET['keyword'])?$_GET['keyword']:""; ?>">
                         <!--<input class="input-xlarge form-control" placeholder="状态" id="" type="text">-->
-                        <label for="sexCondition">性别</label>
-                        <select name="sex" id="sexCondition">
+                        <br/>
+                        <label for="sexCondition">性别：</label>
+                        <select name="sex" id="sexCondition" class="form-control">
+                            <option value="">无</option>
                             <option value="1">男</option>
                             <option value="2">女</option>
                             <option value="3">其他</option>
                         </select>
-                        <label for="idtypeCondition">证件类型</label>
-                        <select name="idtype" id="idtypeCondition">
+                        <label for="idtypeCondition">证件类型：</label>
+                        <select name="idtype" id="idtypeCondition" class="form-control">
+                            <option value="">无</option>
                             <option value="身份证">身份证</option>
                             <option value="学生证">学生证</option>
                             <option value="其他">其他证件</option>
                         </select>
-                        <label for="printTypeCondition">打印类型</label>
-                        <select name="print_type" id="printTypeCondition">
+                        <label for="printTypeCondition">打印类型：</label>
+                        <select name="print_type" id="printTypeCondition" class="form-control">
+                            <option value="">无</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <label for="resultCondition">打印结果</label>
-                        <select name="result" id="idresultConditiontypeCondition">
+                        <label for="resultCondition">打印结果：</label>
+                        <select name="result" id="idresultConditiontypeCondition" class="form-control">
+                            <option value="">无</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                         </select>
                         <input type="text" data-search="1" class="search" hidden>
-                        <button class="btn btn-default" type="button" onclick="searchFunc()"><i class="fa fa-search"></i> 查找</button>
-                        <button class="btn btn-default" type="button" onclick="unsearchFunc()"><i class="fa fa-search"></i> 清除</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-success" type="button" onclick="searchFunc()"><i class="fa fa-search"></i> 查找</button>
+                        <button class="btn btn-default" type="button" onclick="unsearchFunc()"><i class="fa fa-refresh"></i> 清除</button>
                     </form>
                 </div>
         <div class="main-content result">
@@ -70,7 +71,7 @@
                    <tr>
                        <th>ID</th>
                        <th>打印时间</th>
-                       <th>一维码内容</th>
+                       <th>一维码</th>
                        <th>打印信息</th>
                        <th>打印类型</th>
                        <th>证件类型</th>
@@ -80,7 +81,7 @@
                        <th>证件号码</th>
                        <th>姓名</th>
                        <th>携带儿童</th>
-                       <th>团队携带者</th>
+                       <th>携带团队</th>
                        <th>打印结果</th>
                        <th>错误信息</th>
                        <!--<th>时间</th>-->
@@ -164,6 +165,3 @@
             });
         </script>
 
-</body>
-
-</html>

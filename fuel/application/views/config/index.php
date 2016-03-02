@@ -1,7 +1,3 @@
-<!doctype html>
-<html lang="cn">
-<body class=" theme-blue">
-   
     <div class="content">
         <div class="header">
 
@@ -129,6 +125,4 @@
 
 </script>
 
-</body>
 
-</html>

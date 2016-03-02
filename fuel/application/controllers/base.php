@@ -12,6 +12,8 @@ class Base extends CI_Controller{
         $this->check_user_status();
         //读取Session中的用户名
         $this->username = $this->session->userdata('username');
+        //设置时区
+        date_default_timezone_set("Asia/Shanghai");
         // $this->migrate();
     }
     //加载公共区域内容

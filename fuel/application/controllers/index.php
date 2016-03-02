@@ -7,8 +7,9 @@ class Index extends Base{
         // $this->load->
     }
     public function index(){
-        $this->load->view("index/index");
         parent::_after_index();
+        $this->load->view("index/index");
+
     }
     public function error_404(){
     }

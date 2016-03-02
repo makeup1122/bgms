@@ -35,7 +35,6 @@ class User_model extends CI_Model{
     }
     //更新登陆状态
     function  updateLoginInfo($userinfo){
-        date_default_timezone_set("Asia/Shanghai");
         $Info['last_login_time'] = date("Y-m-d H:i:s",strtotime('now'));
         $Info['last_login_ip'] = $_SERVER["REMOTE_ADDR"];
         $this->db->where('id', $userinfo->id);

@@ -1,4 +1,5 @@
-<div class="sidebar-nav">
+<body class="theme-blue">
+    <div class="sidebar-nav">
     <ul>
         <li><a href="#" data-target=".dashboard-menu" class="nav-header <?php echo (isset($controller)&&($controller =='devices'))?"":"collapsed" ?>" data-toggle="collapse"><i class="fa fa-fw fa-laptop"></i> <strong class="sidebar-title">设备管理</strong><i class="fa fa-collapse"></i></a></li>
         <li>
@@ -15,8 +16,8 @@
                     <a href="/print_log/index"><span class="fa fa-caret-right"></span> 日志列表</a>
                 </li>
                 <!--<li ><a href="sign-up.html"><span class="fa fa-caret-right"></span> 添加打印日志</a></li>-->
-            </ul>
-            <ul class="accounts-menu nav nav-list collapse <?php echo (isset($controller)&&($controller =='print_log'))?"in":"" ?>">
+            <!--</ul>-->
+            <!--<ul class="accounts-menu nav nav-list collapse <?php echo (isset($controller)&&($controller =='print_log'))?"in":"" ?>">-->
                 <li class="<?php echo (isset($controller)&&($controller =='print_log')&&(null!==$this->uri->segment(2))&&($this->uri->segment(2) =='statistics'))?"active":"" ?>">
                     <a href="/print_log/statistics"><span class="fa fa-caret-right"></span> 统计查询</a>
                 </li>

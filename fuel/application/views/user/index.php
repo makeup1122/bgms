@@ -36,6 +36,7 @@
                         <!--<input class="input-xlarge form-control" placeholder="状态" id="" type="text">-->
                         <lable>状态：</lable>
                         <select name="status">
+                            <option value="">无</option>
                             <?php
                                 foreach($statusVal as $k=>$v){
                                     echo "<option value=".$k.">".$v."</option>";

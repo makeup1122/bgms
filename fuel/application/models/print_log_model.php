@@ -23,5 +23,21 @@ class Print_log_model extends CI_Model{
         }
         return $this->db->count_all_results('print_log');
     }
+    // 获取统计数据
+    function getSearch($where=""){
+        if(!empty($where)){
+            // $this->db->like($where);
+            $this->db->where($where);
+        }
+        $this->db->select("DATE_FORMAT(stamp_time,'%Y-%m-%d') as day,sum(people_num) as num",false);
+        $this->db->group_by("TO_DAYS(stamp_time)");
+        $result = $this->db->get('print_log');
+        // echo $this->db->last_query();
+        return $result->result();
+    }
+    //组合内容
+    private function _procData($data){
+        
+    }
 }
 ?>

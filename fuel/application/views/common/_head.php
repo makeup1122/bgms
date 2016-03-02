@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <script src="/assets/js/jquery-1.11.1.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.css">
-    <script type="text/javascript" src="/assets/js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-datepicker.min.css" />
+    <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <style type="text/css">
         body {
@@ -25,7 +25,7 @@
         }
         
         .content {
-            height: 95%;
+            min-height: 95%;
         }
         
         #line-chart {
@@ -43,7 +43,6 @@
             float:right;
             margin:0;
             margin-right:10px;
-            margin-bottom:110px;
         }
         .pagination>a, .pagination>strong {
           position: relative;

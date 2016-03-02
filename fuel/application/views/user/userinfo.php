@@ -1,4 +1,3 @@
-<body class="theme-blue">
         <div class="content">
         <div class="header">
             
@@ -105,4 +104,3 @@
             </footer>
         </div>
     </div>
-</body>
