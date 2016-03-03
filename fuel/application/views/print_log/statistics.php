@@ -77,7 +77,7 @@
                         </select>
                         <!--<input type="text" data-search="1" class="search" hidden>-->
                         &nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-success" type="button" onclick="javascript:$('.form_search').submit();"><i class="fa fa-search"></i> 查找</button>
+                        <button class="btn btn-success " type="button" onclick="javascript:renderChart();"><i class="fa fa-search"></i> 查看</button>
                         <button class="btn btn-default" type="button" onclick="javascript:$('.form_search')[0].reset();"><i class="fa fa-refresh"></i> 清除</button>
                     </form>
                 </div>
@@ -85,6 +85,9 @@
             <div class="btn-toolbar list-toolbar">
                 <div class="btn-group">
                 </div>
+            </div>
+            <div class="chartsArea" style="width:700px;height:400px;">
+                
             </div>
             <!--<table class="table">-->
             <!--    <thead>-->
@@ -109,8 +112,8 @@
             <!--    </tbody>-->
             <!--</table>-->
 
-            <ul class="pagination">
-            </ul>
+            <!--<ul class="pagination">-->
+            <!--</ul>-->
 
 
             <footer>
@@ -120,7 +123,14 @@
         </div>
         <script type="text/javascript" src="/assets/js/bootstrap-datepicker.min.js"></script>
         <script type="text/javascript" src="/assets/js/bootstrap-datepicker.zh-CN.min.js"></script>
+        <script type="text/javascript" src="/assets/js/highcharts.js"></script>
+
         <script type="text/javascript">
+            var today = new Date(),
+                year = today.getFullYear(),
+                month = today.getMonth()+1<10?"0"+(today.getMonth()+1):today.getMonth()+1;
+                day = today.getDate()<10?("0"+(today.getDate())):(today.getDate());
+            $('#end_time').val(year+"-"+month+"-"+day);
             $('#begin_time').datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true,
@@ -135,47 +145,70 @@
                 clearBtn: true,
                 todayHighlight: true
             });
-//          function searchFunc(){
-//       $(".search").attr('data-search','2');
-//       getPrintLogs('');
-//   }
-//   function unsearchFunc(){
-//       $(".form_search")[0].reset();
-//       $(".search").attr('data-search','1');
-//       getPrintLogs('');
-//   }
-            function getPrintLogs(page) {
-                //   var data = "";
-    //   if($(".search").attr('data-search') === '2'){
-    //     //   console.log("D");
-    //       data = ;
-    //   }
+            function renderChart(page) {
                 $.ajax({
-                    url: "/print_log/search",
+                    url: "/print_log/statis",
                     type: "GET",
                     data : $(".form_search").serialize(),
-                    // dataType: "json",
+                    dataType: "json",
                     success: function(data) {
-                        console.log(data);
-                        // var dataHtml = "";
-                        // for (var i = 0; i < data.result.length; i++) {
-                        //     var item = data.result[i];
-                        //     dataHtml += '<tr>' +
-                        //         '<td>' + item.print_time + '</td><td>' + item.print_type + '</td><td>' + item.idtype + '</td><td>' + item.people_num + '</td><td>' + item.sex + '</td>' + '</td><td>' + item.id_num + '</td><td>' + item.name + '</td><td>' + item.hasChild + '</td><td>' + item.hasGroup + '</td><td>' + item.result + '</td>' +
-                        //         '</tr>';
-                        // }
-                        // $(".result table tbody").html(dataHtml);
-                        // $(".pagination").html(data.pageinfo);
+                        // console.log(data);
+                        var result = [];
+                        for(var i=0;i<data.length;i++){
+                            result.push([data[i].day,Number(data[i].num)]);
+                        }
+                        $('.chartsArea').highcharts({
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: '打印日志统计'
+                            },
+                            subtitle: {
+                                text: $("#begin_time").val()+'至'+ $("#end_time").val() +'数据'
+                            },
+                            xAxis: {
+                                type: 'category',
+                                labels: {
+                                    rotation: -45,
+                                    style: {
+                                        fontSize: '10px',
+                                        fontFamily: '微软雅黑'
+                                    }
+                                }
+                            },
+                            yAxis: {
+                                min: 0,
+                                title: {
+                                    text: '单位（人次）'
+                                }
+                            },
+                            legend: {
+                                enabled: false
+                            },
+                            tooltip: {
+                                pointFormat: '<b>{point.y} 人次</b>'
+                            },
+                            series: [{
+                                name: 'Population',
+                                data: result,
+                                dataLabels: {
+                                    enabled: true,
+                                    rotation: -90,
+                                    color: '#FFFFFF',
+                                    align: 'right',
+                                    // format: '{point.y:.1f}', // one decimal
+                                    y: 10, // 10 pixels down from the top
+                                    style: {
+                                        fontSize: '13px',
+                                        fontFamily: '微软雅黑'
+                                    }
+                                }
+                            }]
+                        });
                     }
                 });
             }
-            getPrintLogs();
-            //获取首页数据
-            // getPrintLogs("");
-            //绑定页面跳转事件
-            // $(".pagination").on('click', 'a', function() {
-            //     console.log($(this).attr("data-href"));
-            //     getPrintLogs($(this).attr("data-href"));
-            // });
+            renderChart();
         </script>
 
