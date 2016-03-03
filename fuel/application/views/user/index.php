@@ -25,7 +25,7 @@
             <div class="search-well">
                     <form class="form-inline form_search" style="margin-top:0px;" action="/user/items" method="get">
                         <label for="">条件：</label>
-                        <select name="condition">
+                        <select class="form-control" name="condition">
                             <option value="1">用户名</option>
                             <option value="2">ID</option>
                             <option value="3">手机号</option>
@@ -35,7 +35,7 @@
                         <input name="keyword" class="input-xlarge form-control" placeholder="关键字" id="" type="text" value="<?php echo isset($_GET['keyword'])?$_GET['keyword']:""; ?>">
                         <!--<input class="input-xlarge form-control" placeholder="状态" id="" type="text">-->
                         <lable>状态：</lable>
-                        <select name="status">
+                        <select class="form-control" name="status">
                             <option value="">无</option>
                             <?php
                                 foreach($statusVal as $k=>$v){
@@ -43,9 +43,9 @@
                                 }
                             ?>
                         </select>
-                        <input type="text" data-search="1" class="search" hidden>
-                        <button class="btn btn-default" type="button" onclick="searchFunc()"><i class="fa fa-search"></i> 查找</button>
-                        <button class="btn btn-default" type="button" onclick="unsearchFunc()"><i class="fa fa-search"></i> 清除</button>
+                        <input type="text" data-search="1" class="search" hidden>&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-success" type="button" onclick="searchFunc()"><i class="fa fa-search"></i> 查找</button>
+                        <button class="btn btn-default" type="button" onclick="unsearchFunc()"><i class="fa fa-refresh"></i> 清除</button>
                     </form>
                 </div>
             <table class="table">
@@ -240,8 +240,8 @@
 
         }]
     }
-    $('.chart1').highcharts(chartconfig);
-    $('.chart2').highcharts(chartconfig);
+    // $('.chart1').highcharts(chartconfig);
+    // $('.chart2').highcharts(chartconfig);
 </script>
 
 </body>

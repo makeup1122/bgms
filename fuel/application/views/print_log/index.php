@@ -23,7 +23,7 @@
                         <lable>关键字：</lable>
                         <input name="keyword" class="input-xlarge form-control" placeholder="关键字" id="" type="text" value="<?php echo isset($_GET['keyword'])?$_GET['keyword']:""; ?>">
                         <!--<input class="input-xlarge form-control" placeholder="状态" id="" type="text">-->
-                        <br/>
+                        <br/><br/>
                         <label for="sexCondition">性别：</label>
                         <select name="sex" id="sexCondition" class="form-control">
                             <option value="">无</option>
