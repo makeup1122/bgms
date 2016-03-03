@@ -16,7 +16,7 @@
             <!--暂时不要这个人数了，因为逻辑上想不通!!!!!!-->
              <!--<label for="">人数</label><input type="text" name="mix_people_num"> - <input type="text" name="max_people_num">-->
 
-                    <form class="form-inline form_search" style="margin-top:0px;" action="/print_log/statis" method="get">
+                    <form class="form-inline form_search" style="margin-top:0px;" action="/printlog/statis" method="get">
                         <label for="">统计日期：</label><input type="text" value="2016-01-01" class="form-control" id="begin_time" name="begin_time"> 至 <input type="text" class="form-control" id="end_time" name="end_time">
                         <!--<label for="">条件：</label>-->
                         <!--<select name="condition" class="form-control">-->
@@ -147,7 +147,7 @@
             });
             function renderChart(page) {
                 $.ajax({
-                    url: "/print_log/statis",
+                    url: "/printlog/statis",
                     type: "GET",
                     data : $(".form_search").serialize(),
                     dataType: "json",

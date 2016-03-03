@@ -138,7 +138,7 @@
           data = $(".form_search").serialize();
       }
                 $.ajax({
-                    url: "/print_log/items" + page,
+                    url: "/printlog/items" + page,
                     type: "GET",
                     data : data,
                     dataType: "json",

@@ -1,6 +1,6 @@
 <?php
 require_once("base.php");
-class Print_log extends Base{
+class Printlog extends Base{
      function __construct(){
         parent::__construct();
         $this->load->model('Print_log_model','model');
