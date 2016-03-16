@@ -63,7 +63,7 @@
                             <!--<option value="3">3</option>-->
                             <!--<option value="4">4</option>-->
                         </select>
-                        <label for="resultCondition">携带儿童：</label>
+                        <label for="resultCondition">儿童票：</label>
                         <select name="hasChild" id="idresultConditiontypeCondition" class="form-control">
                             <option value="">不限</option>
                             <option value="0">否</option>
@@ -162,7 +162,7 @@
                                 type: 'column'
                             },
                             title: {
-                                text: '打印日志统计'
+                                text: '参观人数统计'
                             },
                             subtitle: {
                                 text: $("#begin_time").val()+'至'+ $("#end_time").val() +'数据'

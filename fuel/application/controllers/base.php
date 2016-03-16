@@ -49,7 +49,7 @@ class Base extends CI_Controller{
         $pageinfo = $this->pagination->create_links();
         $pageinfo = str_replace("href"," href='#' data-href",$pageinfo);
         $result = $this->model->getContent($config['per_page'],$this->uri->segment(3),$where);
-        echo json_encode(array("result"=>$result,"pageinfo"=>$pageinfo));
+        echo json_encode(array("result"=>$result,"pageinfo"=>$pageinfo,"total_rows"=>$total_rows));
     }
     //组合搜索条件
     public function search(){

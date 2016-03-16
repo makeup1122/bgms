@@ -36,8 +36,12 @@ class Print_log_model extends CI_Model{
         return $result->result();
     }
     //组合内容
-    private function _procData($data){
-        
+    function today(){
+        $where = array();
+        $where['stamp_time>'] = date("Y-m-d",strtotime('now'));
+        $this->db->where("DATEDIFF(stamp_time,NOW()) = 0");
+        $result = $this->db->get('print_log');
+        return $result->result();
     }
 }
 ?>

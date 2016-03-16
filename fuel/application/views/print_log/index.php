@@ -9,6 +9,8 @@
         </div>
         <div class="search-well">
                     <form class="form-inline form_search" style="margin-top:0px;" action="/user/items" method="get">
+                        <label for="">日期：</label><input type="text" class="form-control" id="end_time" name="end_time">
+                        <br/><br/>
                         <label for="">条件：</label>
                         <select name="condition" class="form-control">
                             <!--<option value="1">用户名</option>-->
@@ -38,22 +40,22 @@
                             <option value="学生证">学生证</option>
                             <option value="其他">其他证件</option>
                         </select>
-                        <label for="printTypeCondition">打印类型：</label>
-                        <select name="print_type" id="printTypeCondition" class="form-control">
-                            <option value="">无</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
+                        <!--<label for="printTypeCondition">打印类型：</label>-->
+                        <!--<select name="print_type" id="printTypeCondition" class="form-control">-->
+                        <!--    <option value="">无</option>-->
+                        <!--    <option value="1">1</option>-->
+                        <!--    <option value="2">2</option>-->
+                        <!--    <option value="3">3</option>-->
+                        <!--    <option value="4">4</option>-->
+                        <!--    <option value="5">5</option>-->
+                        <!--</select>-->
                         <label for="resultCondition">打印结果：</label>
                         <select name="result" id="idresultConditiontypeCondition" class="form-control">
                             <option value="">无</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                            <option value="1">正常</option>
+                            <option value="2">其他</option>
+                            <!--<option value="3">3</option>-->
+                            <!--<option value="4">4</option>-->
                         </select>
                         <input type="text" data-search="1" class="search" hidden>
                         &nbsp;&nbsp;&nbsp;
@@ -71,16 +73,16 @@
                    <tr>
                        <th>ID</th>
                        <th>打印时间</th>
-                       <th>一维码</th>
+                       <!--<th>一维码</th>-->
                        <th>打印信息</th>
-                       <th>打印类型</th>
+                       <!--<th>打印类型</th>-->
                        <th>证件类型</th>
-                       <th>图像路径</th>
+                       <th>图像</th>
                        <th>人数</th>
                        <th>性别</th>
                        <th>证件号码</th>
                        <th>姓名</th>
-                       <th>携带儿童</th>
+                       <th>儿童</th>
                        <th>携带团队</th>
                        <th>打印结果</th>
                        <th>错误信息</th>
@@ -90,7 +92,7 @@
                 <tbody>
                 </tbody>
             </table>
-
+            <label for="">共<i class="total_rows"></i>条记录</label>
             <ul class="pagination">
             </ul>
 
@@ -119,49 +121,63 @@
                 <p>© 2016 BGMS</p>
             </footer>
         </div>
-
+        <script type="text/javascript" src="/assets/js/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript" src="/assets/js/bootstrap-datepicker.zh-CN.min.js"></script>
 
         <script type="text/javascript">
-         function searchFunc(){
-       $(".search").attr('data-search','2');
-       getPrintLogs('');
-   }
-   function unsearchFunc(){
-       $(".form_search")[0].reset();
-       $(".search").attr('data-search','1');
-       getPrintLogs('');
-   }
-            function getPrintLogs(page) {
-                  var data = "";
-      if($(".search").attr('data-search') === '2'){
-        //   console.log("D");
-          data = $(".form_search").serialize();
-      }
-                $.ajax({
-                    url: "/printlog/items" + page,
-                    type: "GET",
-                    data : data,
-                    dataType: "json",
-                    success: function(data) {
-                        // console.log(data);
-                        var dataHtml = "";
-                        for (var i = 0; i < data.result.length; i++) {
-                            var item = data.result[i];
-                            dataHtml += '<tr>' +
-                                '<td>' + item.id + '</td><td>' + item.print_time + '</td><td>' + item.print_barcode + '</td><td>' + item.print_info + '</td><td>' + item.print_type + '</td><td>' + item.idtype + '</td><td>' + item.scan_pic + '</td><td>' + item.people_num + '</td><td>' + item.sex + '</td>' + '</td><td>' + item.id_num + '</td><td>' + item.name + '</td><td>' + item.hasChild + '</td><td>' + item.hasGroup + '</td><td>' + item.result + '</td><td>' + item.error_msg + '</td>' +
-                                '</tr>';
-                        }
-                        $(".result table tbody").html(dataHtml);
-                        $(".pagination").html(data.pageinfo);
-                    }
-                });
-            }
-            //获取首页数据
-            getPrintLogs("");
-            //绑定页面跳转事件
-            $(".pagination").on('click', 'a', function() {
-                console.log($(this).attr("data-href"));
-                getPrintLogs($(this).attr("data-href"));
+         $('#end_time').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                language: 'zh-CN',
+                clearBtn: true,
+                todayHighlight: true
             });
+         function searchFunc() {
+             $(".search").attr('data-search', '2');
+             getPrintLogs('');
+         }
+
+         function unsearchFunc() {
+             $(".form_search")[0].reset();
+             $(".search").attr('data-search', '1');
+             getPrintLogs('');
+         }
+
+         function getPrintLogs(page) {
+             var data = "";
+             if ($(".search").attr('data-search') === '2') {
+                 //   console.log("D");
+                 data = $(".form_search").serialize();
+             }
+             $.ajax({
+                 url: "/printlog/items" + page,
+                 type: "GET",
+                 data: data,
+                 dataType: "json",
+                 success: function(data) {
+                     // console.log(data);
+                     var dataHtml = "";
+                     for (var i = 0; i < data.result.length; i++) {
+                         var item = data.result[i];
+                         item.hasChild = (item.hasChild == 1) ? "是" : "否";
+                         item.hasGroup = (item.hasGroup == 1) ? "是" : "否";
+                         dataHtml += '<tr>' +
+                             '<td>' + item.id + '</td><td>' + item.print_time + '</td><td>' + item.print_info + '</td><td>' + item.idtype + '</td><td>' + item.scan_pic + '</td><td>' + item.people_num + '</td><td>' + item.sex + '</td>' + '</td><td>' + item.id_num + '</td><td>' + item.name + '</td><td>' + item.hasChild + '</td><td>' + item.hasGroup + '</td><td>' + item.result + '</td><td>' + item.error_msg + '</td>' +
+                             // <td>' + item.print_type + '</td>
+                             '</tr>';
+                     }
+                     $(".result table tbody").html(dataHtml);
+                     $(".pagination").html(data.pageinfo);
+                     $(".total_rows").html(data.total_rows);
+                 }
+             });
+         }
+         //获取首页数据
+         getPrintLogs("");
+         //绑定页面跳转事件
+         $(".pagination").on('click', 'a', function() {
+             console.log($(this).attr("data-href"));
+             getPrintLogs($(this).attr("data-href"));
+         });
         </script>
 
