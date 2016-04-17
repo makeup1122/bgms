@@ -1,15 +1,15 @@
     <div class="content print_log">
         <div class="header">
 
-            <h1 class="page-title">打印日志</h1>
+            <h1 class="page-title">扫描日志</h1>
             <ul class="breadcrumb">
                 <li><a href="/">主页</a> </li>
-                <li class="active">打印日志列表</li>
+                <li class="active">扫描日志列表</li>
             </ul>
         </div>
         <div class="search-well">
                     <form class="form-inline form_search" style="margin-top:0px;" action="/user/items" method="get">
-                        <label for="">打印日期：</label><input type="text" class="form-control" id="end_time" name="end_time">
+                        <label for="">进馆日期：</label><input type="text" class="form-control" id="end_time" name="enter_time">
                         <br/><br/>
                         <label for="">条件：</label>
                         <select name="condition" class="form-control">
@@ -49,11 +49,11 @@
                         <!--    <option value="4">4</option>-->
                         <!--    <option value="5">5</option>-->
                         <!--</select>-->
-                        <label for="resultCondition">打印结果：</label>
-                        <select name="result" id="idresultConditiontypeCondition" class="form-control">
-                            <option value="">无</option>
-                            <option value="1">正常</option>
-                            <option value="2">其他</option>
+                        <label for="enterCondition">是否进馆：</label>
+                        <select name="enter" id="enterCondition" class="form-control">
+                            <option value="">全部</option>
+                            <option value="1">是</option>
+                            <option value="2">否</option>
                             <!--<option value="3">3</option>-->
                             <!--<option value="4">4</option>-->
                         </select>
@@ -72,7 +72,8 @@
                 <thead>
                    <tr>
                        <th>ID</th>
-                       <th>打印时间</th>
+                       <th>出票时间</th>
+                       <th>进馆时间</th>
                        <!--<th>一维码</th>-->
                        <th>打印信息</th>
                        <!--<th>打印类型</th>-->
@@ -85,8 +86,8 @@
                        <th>姓名</th>
                        <th>儿童</th>
                        <th>携带团队</th>
-                       <th>打印结果</th>
-                       <th>错误信息</th>
+                       <!--<th>打印结果</th>-->
+                       <!--<th>错误信息</th>-->
                        <!--<th>时间</th>-->
                     </tr>
                 </thead>
@@ -163,7 +164,7 @@
                          item.hasChild = (item.hasChild == 1) ? "是" : "否";
                          item.hasGroup = (item.hasGroup == 1) ? "是" : "否";
                          dataHtml += '<tr>' +
-                             '<td>' + item.id + '</td><td>' + item.print_time + '</td><td>' + item.print_info + '</td><td>' + item.idtype + '</td><td>' + item.scan_pic + '</td><td>' + item.people_num + '</td><td>' + item.sex + '</td>' + '</td><td>' + item.id_num + '</td><td>'+item.area_name+'</td><td>' + item.name + '</td><td>' + item.hasChild + '</td><td>' + item.hasGroup + '</td><td>' + item.result + '</td><td>' + item.error_msg + '</td>' +
+                             '<td>' + item.id + '</td><td>' + item.print_time + '</td><td>' + item.enter_time + '</td><td>' + item.print_info + '</td><td>' + item.idtype + '</td><td>' + item.scan_pic + '</td><td>' + item.people_num + '</td><td>' + item.sex + '</td>' + '</td><td>' + item.id_num + '</td><td>'+item.area_name+'</td><td>' + item.name + '</td><td>' + item.hasChild + '</td><td>' + item.hasGroup + '</td>' +
                              // <td>' + item.print_type + '</td>
                              '</tr>';
                      }

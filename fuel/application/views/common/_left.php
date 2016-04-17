@@ -9,11 +9,14 @@
             </ul>
         </li>
 
-        <li><a href="#" data-target=".accounts-menu" class="nav-header <?php echo (isset($controller)&&($controller =='printlog'))?"":"collapsed" ?>" data-toggle="collapse"><i class="fa fa-fw fa-print"></i> <strong class="sidebar-title">打印日志</strong> <i class="fa fa-collapse"></i></a></li>
+        <li><a href="#" data-target=".accounts-menu" class="nav-header <?php echo (isset($controller)&&($controller =='printlog'))?"":"collapsed" ?>" data-toggle="collapse"><i class="fa fa-fw fa-print"></i> <strong class="sidebar-title">日志查询</strong> <i class="fa fa-collapse"></i></a></li>
         <li>
             <ul class="accounts-menu nav nav-list collapse <?php echo (isset($controller)&&($controller =='printlog'))?"in":"" ?>">
                 <li class="<?php echo (isset($controller)&&($controller =='printlog')&&(null!==$this->uri->segment(2))&&($this->uri->segment(2) =='index'))?"active":"" ?>">
-                    <a href="/printlog/index"><span class="fa fa-caret-right"></span> 日志列表</a>
+                    <a href="/printlog/index"><span class="fa fa-caret-right"></span> 打印日志</a>
+                </li>
+                <li class="<?php echo (isset($controller)&&($controller =='printlog')&&(null!==$this->uri->segment(2))&&($this->uri->segment(2) =='scaner'))?"active":"" ?>">
+                    <a href="/printlog/scaner"><span class="fa fa-caret-right"></span> 扫描日志</a>
                 </li>
                 <!--<li ><a href="sign-up.html"><span class="fa fa-caret-right"></span> 添加打印日志</a></li>-->
             <!--</ul>-->

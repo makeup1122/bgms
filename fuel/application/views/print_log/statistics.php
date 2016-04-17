@@ -31,6 +31,13 @@
                         <!--<lable>关键字：</lable>-->
                         <!--<input name="keyword" class="input-xlarge form-control" placeholder="关键字" id="" type="text" value="<?php echo isset($_GET['keyword'])?$_GET['keyword']:""; ?>">-->
                         <!--<input class="input-xlarge form-control" placeholder="状态" id="" type="text">-->
+                        &nbsp;&nbsp;&nbsp;<label for="unit">统计单位：</label>
+                        <select name="unit" id="unit"  class="form-control">
+                            <option value="1">日</option>
+                            <option value="2">月</option>
+                            <option value="3">季度</option>
+                            <option value="4">年</option>
+                        </select>
                         <br><br>
                         <label for="sexCondition">性别：</label>
                         <select name="sex" id="sexCondition" class="form-control">
@@ -75,6 +82,20 @@
                             <option value="0">否</option>
                             <option value="1">是</option>
                         </select>
+                        <label for="enter">是否进馆</label>
+                        <select name="enter" id="enter" class="form-control">
+                            <option value="">不限</option>
+                            <option value="1">是</option>
+                            <option value="2">否</option>
+                        </select>
+                        <label for="zone">区域</label>
+                        <select name="zone" id="zone" class="form-control">
+                            <option value="">不限</option>
+                            <option value="1">本地</option>
+                            <option value="2">省内</option>
+                            <option value="3">省外</option>
+                            <option value="4">未知</option>
+                        </select>
                         <!--<input type="text" data-search="1" class="search" hidden>-->
                         &nbsp;&nbsp;&nbsp;
                         <button class="btn btn-success " type="button" onclick="javascript:renderChart();"><i class="fa fa-search"></i> 查看</button>
@@ -115,7 +136,7 @@
             <!--<ul class="pagination">-->
             <!--</ul>-->
 
-
+                <label class="countAll">总数：<span></span></label>
             <footer>
                 <hr>
                 <p>© 2016 BGMS</p>
@@ -154,9 +175,12 @@
                     success: function(data) {
                         // console.log(data);
                         var result = [];
+                        var countAll = 0;
                         for(var i=0;i<data.length;i++){
                             result.push([data[i].day,Number(data[i].num)]);
+                            countAll = countAll + Number(data[i].num);
                         }
+                        $(".countAll span").html(countAll);
                         $('.chartsArea').highcharts({
                             chart: {
                                 type: 'column'

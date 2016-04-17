@@ -15,6 +15,7 @@ class Base extends CI_Controller{
         //设置时区
         date_default_timezone_set("Asia/Shanghai");
         // $this->migrate();
+        $this->load->helper('date');
     }
     //加载公共区域内容
     public function _after_index(){
@@ -79,6 +80,15 @@ class Base extends CI_Controller{
         if(isset($data['idtype'])){$where['idtype'] = $data['idtype'];}
         if(isset($data['result'])){$where['result'] = $data['result'];}
         if(isset($data['print_type'])){$where['print_type'] = $data['print_type'];}
+        if(isset($data['end_time'])){$where['stamp_time'] = $data['end_time'];}
+        if(isset($data['enter_time'])){$where['enter_time'] = $data['enter_time'];}
+        if(isset($data['enter'])){
+            if($data['enter'] == '1'){
+                $where['enter_time'] = "20"; 
+            }else if($data['enter'] == '2'){
+                $where['enter_time'] = "0000-00-00 00:00:00";
+            }
+        }
         // var_dump($where);
         return $where;
     }
