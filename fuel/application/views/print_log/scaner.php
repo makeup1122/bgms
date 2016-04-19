@@ -164,7 +164,7 @@
                          item.hasChild = (item.hasChild == 1) ? "是" : "否";
                          item.hasGroup = (item.hasGroup == 1) ? "是" : "否";
                          dataHtml += '<tr>' +
-                             '<td>' + item.id + '</td><td>' + item.print_time + '</td><td>' + item.enter_time + '</td><td>' + item.print_info + '</td><td>' + item.idtype + '</td><td>' + item.scan_pic + '</td><td>' + item.people_num + '</td><td>' + item.sex + '</td>' + '</td><td>' + item.id_num + '</td><td>'+item.area_name+'</td><td>' + item.name + '</td><td>' + item.hasChild + '</td><td>' + item.hasGroup + '</td>' +
+                             '<td>' + item.id + '</td><td>' + item.stamp_time + '</td><td>' + item.enter_time + '</td><td>' + item.print_info + '</td><td>' + item.idtype + '</td><td>' + item.scan_pic + '</td><td>' + item.people_num + '</td><td>' + item.sex + '</td>' + '</td><td>' + item.id_num + '</td><td>'+item.area_name+'</td><td>' + item.name + '</td><td>' + item.hasChild + '</td><td>' + item.hasGroup + '</td>' +
                              // <td>' + item.print_type + '</td>
                              '</tr>';
                      }
