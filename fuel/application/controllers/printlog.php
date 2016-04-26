@@ -84,8 +84,10 @@ class Printlog extends Base{
             }else if($data['zone'] == '2'){//省内
                 $this->model->db->like("zone","14", "after");
             }else if($data['zone'] == '3'){//省外
-                $this->model->db->where("zone !=","");
                 $this->model->db->not_like("zone","14", "after");
+                $this->model->db->where("zone !=","");
+            }else if($data['zone'] == '4'){
+                $this->model->db->where("zone","");
             }
         }
         // 3.8 查询单位
@@ -95,10 +97,10 @@ class Printlog extends Base{
                 $this->db->group_by("TO_DAYS(stamp_time)");
             }else if($data['unit'] == '2'){//月
                 $this->db->select("CONCAT(DATE_FORMAT(stamp_time,'%Y-%m'),'月') as day,sum(people_num) as num",false);
-                $this->db->group_by("MONTH(stamp_time)");
+                $this->db->group_by("CONCAT(YEAR(stamp_time),MONTH(stamp_time))");
             }else if($data['unit'] == '3'){//季度
                 $this->db->select("CONCAT(DATE_FORMAT(stamp_time,'%Y'),'-',QUARTER(stamp_time),'季') as day,sum(people_num) as num",false);
-                $this->db->group_by("QUARTER(stamp_time)");
+                $this->db->group_by("CONCAT(YEAR(stamp_time),QUARTER(stamp_time))");
             }else if($data['unit'] == '4'){//年
                 $this->db->select("CONCAT(DATE_FORMAT(stamp_time,'%Y'),'年') as day,sum(people_num) as num",false);
                 $this->db->group_by("YEAR(stamp_time)");
