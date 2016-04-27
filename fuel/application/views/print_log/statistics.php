@@ -100,43 +100,16 @@
                         &nbsp;&nbsp;&nbsp;
                         <button class="btn btn-success " type="button" onclick="javascript:renderChart();"><i class="fa fa-search"></i> 查看</button>
                         <button class="btn btn-default" type="button" onclick="javascript:$('.form_search')[0].reset();"><i class="fa fa-refresh"></i> 清除</button>
+                        <button class="btn btn-default" type="button" onclick="javascript:downloadCSV()"><i class="fa fa-download"></i> 数据导出</button>
                     </form>
                 </div>
-        <div class="main-content result">
+            <div class="main-content result">
             <div class="btn-toolbar list-toolbar">
-                <div class="btn-group">
-                </div>
+                <div class="btn-group"></div>
             </div>
             <div class="chartsArea" style="width:700px;height:400px;">
-                
             </div>
-            <!--<table class="table">-->
-            <!--    <thead>-->
-            <!--       <tr>-->
-                       <!--<th>ID</th>-->
-            <!--           <th>打印时间</th>-->
-                       <!--<th>一维码</th>-->
-            <!--           <th>打印类型</th>-->
-            <!--           <th>证件类型</th>-->
-            <!--           <th>人数</th>-->
-            <!--           <th>性别</th>-->
-            <!--           <th>证件号码</th>-->
-            <!--           <th>姓名</th>-->
-            <!--           <th>携带儿童</th>-->
-            <!--           <th>团队携带者</th>-->
-            <!--           <th>打印结果</th>-->
-            <!--           <th>错误信息</th>-->
-                       <!--<th>时间</th>-->
-            <!--        </tr>-->
-            <!--    </thead>-->
-            <!--    <tbody>-->
-            <!--    </tbody>-->
-            <!--</table>-->
-
-            <!--<ul class="pagination">-->
-            <!--</ul>-->
-
-                <label class="countAll">总数：<span></span></label>
+            <label class="countAll">总数：<span></span></label>
             <footer>
                 <hr>
                 <p>© 2016 BGMS</p>
@@ -166,6 +139,15 @@
                 clearBtn: true,
                 todayHighlight: true
             });
+            function downloadCSV(){
+                // $.ajax({
+                    // url: "/printlog/download",
+                    // type: "GET",
+                    // data : $(".form_search").serialize()
+                // })
+                window.location.href="/printlog/download?"+$(".form_search").serialize();
+                
+            }
             function renderChart(page) {
                 $.ajax({
                     url: "/printlog/statis",

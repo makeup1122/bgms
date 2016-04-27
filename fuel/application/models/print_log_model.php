@@ -42,5 +42,17 @@ class Print_log_model extends CI_Model{
         $result = $this->db->get('print_log');
         return $result->result();
     }
+    //下载文件
+    function download($where=""){
+        //加载数据库工具类
+        $this->load->dbutil();
+        if(!empty($where)){
+            $this->db->where($where);
+        }
+        $result = $this->db->get('print_log');
+        // echo $this->db->last_query();
+        $csv =  $this->dbutil->csv_from_result($result);
+        return $csv;    
+    }
 }
 ?>

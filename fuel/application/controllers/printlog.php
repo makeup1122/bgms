@@ -20,18 +20,30 @@ class Printlog extends Base{
         parent::_after_index();
         $this->load->view("print_log/scaner");
     }
+    //下载查询条CSV数据
+    public function download(){
+        $data = $this->input->get();
+        $where = $this->_procCondition($data,2);
+        $result = $this->model->download($where);
+        $this->load->helper('download');
+        $filename = date("Y-m-d_h:i:s");
+        force_download($filename.".csv", $result);
+    }
     //统计查询接口
     public function statis(){
         $data = $this->input->get();
         // var_dump($data);
-        $where = $this->_procCondition($data);
+        $where = $this->_procCondition($data,1);
         // var_dump($where);
         $result = $this->model->getSearch($where);
         echo json_encode($result);
         // echo "{'2016-03-03':23}";
     }
     //处理查询条件
-    private function _procCondition($data){
+    // @data get参数
+    // @type 1：统计查询
+    // @type 2: 数据导出
+    private function _procCondition($data,$type=1){
         $where = array();
         //1. 时间范围
         // 1.1 开始时间
@@ -91,23 +103,27 @@ class Printlog extends Base{
             }
         }
         // 3.8 查询单位
-        if(isset($data['unit']) && !empty($data['unit'])){
-            if($data['unit'] == '1'){//日
-                $this->db->select("DATE_FORMAT(stamp_time,'%Y-%m-%d') as day,sum(people_num) as num",false);
-                $this->db->group_by("TO_DAYS(stamp_time)");
-            }else if($data['unit'] == '2'){//月
-                $this->db->select("CONCAT(DATE_FORMAT(stamp_time,'%Y-%m'),'月') as day,sum(people_num) as num",false);
-                $this->db->group_by("CONCAT(YEAR(stamp_time),MONTH(stamp_time))");
-            }else if($data['unit'] == '3'){//季度
-                $this->db->select("CONCAT(DATE_FORMAT(stamp_time,'%Y'),'-',QUARTER(stamp_time),'季') as day,sum(people_num) as num",false);
-                $this->db->group_by("CONCAT(YEAR(stamp_time),QUARTER(stamp_time))");
-            }else if($data['unit'] == '4'){//年
-                $this->db->select("CONCAT(DATE_FORMAT(stamp_time,'%Y'),'年') as day,sum(people_num) as num",false);
-                $this->db->group_by("YEAR(stamp_time)");
-            }else{//默认 日
-                $this->db->select("DATE_FORMAT(stamp_time,'%Y-%m-%d') as day,sum(people_num) as num",false);
-                $this->db->group_by("TO_DAYS(stamp_time)");
+        if($type == 1){
+            if(isset($data['unit']) && !empty($data['unit'])){
+                if($data['unit'] == '1'){//日
+                    $this->db->select("DATE_FORMAT(stamp_time,'%Y-%m-%d') as day,sum(people_num) as num",false);
+                    $this->db->group_by("TO_DAYS(stamp_time)");
+                }else if($data['unit'] == '2'){//月
+                    $this->db->select("CONCAT(DATE_FORMAT(stamp_time,'%Y-%m'),'月') as day,sum(people_num) as num",false);
+                    $this->db->group_by("MONTH(stamp_time)");
+                }else if($data['unit'] == '3'){//季度
+                    $this->db->select("CONCAT(DATE_FORMAT(stamp_time,'%Y'),'-',QUARTER(stamp_time),'季') as day,sum(people_num) as num",false);
+                    $this->db->group_by("QUARTER(stamp_time)");
+                }else if($data['unit'] == '4'){//年
+                    $this->db->select("CONCAT(DATE_FORMAT(stamp_time,'%Y'),'年') as day,sum(people_num) as num",false);
+                    $this->db->group_by("YEAR(stamp_time)");
+                }else{//默认 日
+                    $this->db->select("DATE_FORMAT(stamp_time,'%Y-%m-%d') as day,sum(people_num) as num",false);
+                    $this->db->group_by("TO_DAYS(stamp_time)");
+                }
             }
+        }elseif($type == 2){
+            $this->model->db->select("id as 编号,print_time as 打印时间,enter_time as 进馆时间,name as 姓名,sex as 性别,people_num as 人数,id_num as 证件号码,idtype as 证件类型,print_info as 打印信息,hasChild as 是否儿童,hasGroup as 是否团队,zone as 地区代码");
         }
         // var_dump($where);
         return $where;
